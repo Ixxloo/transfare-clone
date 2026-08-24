@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Send files — SafePassage{% endblock %}
+
+{% block content %}
+<section class="upload-panel">
+  <h1>Send files up to 200&nbsp;MB</h1>
+  <p>Upload, get a link, share it however you like.</p>
+
+  <div id="dropzone" class="dropzone">
+    <p>Drag files here or click to browse</p>
+    <input type="file" id="file-input" multiple hidden>
+  </div>
+
+  <div id="file-list"></div>
+
+  <button id="upload-btn" disabled>Get a link</button>
+</section>
+{% endblock %}

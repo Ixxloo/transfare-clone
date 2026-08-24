@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Download — SafePassage{% endblock %}
+
+{% block content %}
+<section class="download-panel">
+  <h1>Someone sent you files</h1>
+  <p class="token-debug">Token: {{ token }}</p>
+
+  <ul id="file-list">
+    <!-- files will be listed here -->
+  </ul>
+
+  <button id="download-btn">Download</button>
+</section>
+{% endblock %}
