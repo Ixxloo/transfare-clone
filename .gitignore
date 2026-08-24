@@ -1,4 +1,12 @@
+# Virtual environment (created in project root)
+Lib/
+Scripts/
+Include/
+pyvenv.cfg
+share/
 venv/
+.venv/
+
 __pycache__/
 *.pyc
 .env
