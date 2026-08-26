@@ -17,4 +17,5 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("login/", auth_views.LoginView.as_view(template_name="transfers/login.html"), name="login"),
     path("logout/", auth_views.LogoutView.as_view(next_page="transfers:home"), name="logout"),
+    path("d/<str:token>/f/<int:file_id>/", views.download_file, name="download_file"),
 ]

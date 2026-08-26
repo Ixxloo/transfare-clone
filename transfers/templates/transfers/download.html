@@ -3,13 +3,36 @@
 
 {% block content %}
 <section class="download-panel">
-  <h1>Someone sent you files</h1>
-  <p class="token-debug">Token: {{ token }}</p>
 
-  <ul id="file-list">
-    <!-- files will be listed here -->
-  </ul>
+  {% if unavailable %}
+    <h1>This link is no longer available</h1>
+    <p>The transfer has expired or been deleted.</p>
 
-  <button id="download-btn">Download</button>
+  {% elif needs_password %}
+    <h1>This transfer is protected</h1>
+    {% if wrong_password %}<p class="error">Wrong password.</p>{% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <input type="password" name="password" placeholder="Password" required>
+      <button type="submit">Unlock</button>
+    </form>
+
+  {% else %}
+    <h1>Someone sent you files</h1>
+    {% if transfer.message %}<p class="message">{{ transfer.message }}</p>{% endif %}
+
+    <ul class="file-list">
+      {% for f in transfer.files.all %}
+        <li>
+          <span>{{ f.original_name }}</span>
+          <a class="download-link"
+             href="{% url 'transfers:download_file' transfer.token f.id %}">Download</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <p class="meta">Expires {{ transfer.expires_at|date:"M j, Y" }}</p>
+  {% endif %}
+
 </section>
 {% endblock %}
