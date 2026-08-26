@@ -64,6 +64,30 @@ function putFile(url, file, onProgress) {
   });
 }
 
+// Wire up the copy button after the link is rendered into the DOM
+function attachCopyHandler(link) {
+  const copyBtn = document.getElementById("copy-link-btn");
+  if (!copyBtn) return;
+
+  copyBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(link);
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => (copyBtn.textContent = "Copy Link"), 1500);
+    } catch (err) {
+      // fallback for older browsers
+      const temp = document.createElement("input");
+      temp.value = link;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => (copyBtn.textContent = "Copy Link"), 1500);
+    }
+  });
+}
+
 uploadBtn.addEventListener("click", async () => {
   uploadBtn.disabled = true;
   uploadBtn.textContent = "Uploading…";
@@ -95,7 +119,15 @@ uploadBtn.addEventListener("click", async () => {
     if (!doneRes.ok) throw new Error(done.error);
 
     const link = window.location.origin + done.download_url;
-    fileList.innerHTML = `<div class="success">Ready: <a href="${link}">${link}</a></div>`;
+    fileList.innerHTML = `
+      <div class="success">
+        Ready:
+        <div class="input-group mt-2">
+          <input type="text" id="link-box" class="form-control" value="${link}" readonly>
+          <button type="button" id="copy-link-btn" class="btn btn-outline-secondary">Copy Link</button>
+        </div>
+      </div>`;
+    attachCopyHandler(link);
     uploadBtn.textContent = "Done";
 
   } catch (err) {
