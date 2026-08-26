@@ -4,13 +4,38 @@
 {% block content %}
 <section class="dashboard">
   <h1>Your transfers</h1>
-  <table>
-    <thead>
-      <tr><th>Files</th><th>Size</th><th>Expires</th><th>Downloads</th><th></th></tr>
-    </thead>
-    <tbody>
-      <!-- rows come later, once models exist -->
-    </tbody>
-  </table>
+  {% if transfers %}
+    <table>
+      <thead>
+        <tr>
+          <th>Link / Token</th>
+          <th>Files Count</th>
+          <th>Expires</th>
+          <th>Downloads</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for transfer in transfers %}
+          <tr>
+            <td>
+              <a href="{% url 'transfers:download' token=transfer.token %}" target="_blank">
+                {{ transfer.token|truncatechars:12 }}
+              </a>
+            </td>
+            <td>{{ transfer.files.count }} file(s)</td>
+            <td>{{ transfer.expires_at|date:"M d, Y H:i"|default:"Never" }}</td>
+            <td>{{ transfer.download_count|default:0 }}</td>
+            <td>
+              <a href="{% url 'transfers:download' token=transfer.token %}">View</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>You haven't created any active file transfers yet.</p>
+    <a href="{% url 'transfers:home' %}" class="btn">Send your first file</a>
+  {% endif %}
 </section>
 {% endblock %}
