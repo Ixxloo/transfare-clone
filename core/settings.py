@@ -107,6 +107,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+# settings.py
+
+LOGIN_URL = 'transfers:login'
+LOGIN_REDIRECT_URL = 'transfers:dashboard'
+LOGOUT_REDIRECT_URL = 'transfers:home'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
