@@ -3,39 +3,55 @@
 
 {% block content %}
 <section class="dashboard">
-  <h1>Your transfers</h1>
+  <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+    <h1 class="h3 fw-bold text-dark-gray mb-0">Your Transfers</h1>
+    <a href="{% url 'transfers:home' %}" class="btn btn-theme btn-sm px-3 shadow-sm">New Transfer</a>
+  </div>
+  
   {% if transfers %}
-    <table>
-      <thead>
-        <tr>
-          <th>Link / Token</th>
-          <th>Files Count</th>
-          <th>Expires</th>
-          <th>Downloads</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for transfer in transfers %}
-          <tr>
-            <td>
-              <a href="{% url 'transfers:download' token=transfer.token %}" target="_blank">
-                {{ transfer.token|truncatechars:12 }}
-              </a>
-            </td>
-            <td>{{ transfer.files.count }} file(s)</td>
-            <td>{{ transfer.expires_at|date:"M d, Y H:i"|default:"Never" }}</td>
-            <td>{{ transfer.download_count|default:0 }}</td>
-            <td>
-              <a href="{% url 'transfers:download' token=transfer.token %}">View</a>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="card shadow-sm border-0" style="border-radius: 12px; overflow: hidden;">
+      <div class="table-responsive">
+        <table class="table table-hover table-borderless align-middle mb-0">
+          <thead style="background-color: #E6E6FA; color: #4a4a4a;">
+            <tr>
+              <th scope="col" class="py-3 px-4">Link / Token</th>
+              <th scope="col" class="py-3">Files</th>
+              <th scope="col" class="py-3">Expires</th>
+              <th scope="col" class="py-3">Downloads</th>
+              <th scope="col" class="py-3 text-end px-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            {% for transfer in transfers %}
+              <tr class="border-bottom">
+                <td class="px-4">
+                  <a href="{% url 'transfers:download' token=transfer.token %}" target="_blank" class="text-decoration-none fw-semibold" style="color: #2c3e50;">
+                    {{ transfer.token|truncatechars:12 }}
+                  </a>
+                </td>
+                <td><span class="badge bg-light text-dark border">{{ transfer.files.count }} file(s)</span></td>
+                <td class="text-muted small">{{ transfer.expires_at|date:"M d, Y H:i"|default:"Never" }}</td>
+                <td>
+                  <span class="badge rounded-pill" style="background-color: #90EE90; color: #2c3e50;">
+                    {{ transfer.download_count|default:0 }}
+                  </span>
+                </td>
+                <td class="text-end px-4">
+                  <a href="{% url 'transfers:download' token=transfer.token %}" class="btn btn-outline-secondary btn-sm">View</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
   {% else %}
-    <p>You haven't created any active file transfers yet.</p>
-    <a href="{% url 'transfers:home' %}" class="btn">Send your first file</a>
+    <div class="card shadow-sm border-0 text-center py-5" style="border-radius: 12px;">
+      <div class="card-body">
+        <p class="text-muted fs-5 mb-4">You haven't created any active file transfers yet.</p>
+        <a href="{% url 'transfers:home' %}" class="btn btn-theme px-4 py-2">Send your first file</a>
+      </div>
+    </div>
   {% endif %}
 </section>
 {% endblock %}
