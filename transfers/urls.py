@@ -1,6 +1,10 @@
 from django.urls import path
+<<<<<<< HEAD
 
 from transfers import api_views
+=======
+from django.contrib.auth import views as auth_views
+>>>>>>> 2fe0bb70d1eb2e4d4dceb82d51fa97804cb69e2c
 from . import views
 
 app_name = "transfers"
@@ -9,6 +13,14 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("d/<str:token>/", views.download, name="download"),
     path("dashboard/", views.dashboard, name="dashboard"),
+<<<<<<< HEAD
     path("api/upload/init/", api_views.upload_init, name="upload_init"),
     path("api/upload/complete/", api_views.upload_complete, name="upload_complete"),
+=======
+    
+    # New Account & Auth routes
+    path("register/", views.register, name="register"),
+    path("login/", auth_views.LoginView.as_type_or_template if hasattr(auth_views, 'LoginView') else auth_views.LoginView.as_view(template_name="transfers/login.html"), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(next_page="transfers:home"), name="logout"),
+>>>>>>> 2fe0bb70d1eb2e4d4dceb82d51fa97804cb69e2c
 ]

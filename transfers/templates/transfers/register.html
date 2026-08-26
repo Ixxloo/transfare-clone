@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %} <!-- Assuming you might use crispy_forms or standard rendering -->
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <!-- Styling with White, Light Green (#90EE90), and Light Lavender (#E6E6FA) -->
+            <div class="card shadow-sm border-0" style="background-color: #ffffff; border-top: 5px solid #90EE90 !important;">
+                <div class="card-body p-4" style="background-color: #F8F9FA;"> <!-- Very subtle grey/lavender tint -->
+                    
+                    <h2 class="text-center mb-4" style="color: #4a4a4a; background-color: #E6E6FA; padding: 10px; border-radius: 5px;">
+                        Create an Account
+                    </h2>
+                    
+                    <p class="text-center text-muted mb-4">Register to manage and view your shared links.</p>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <!-- Renders the form beautifully if you have django-crispy-forms, otherwise just use {{ form.as_p }} -->
+                        {{ form.as_p }}
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn fw-bold" style="background-color: #90EE90; color: #2c3e50;">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="text-center mt-3">
+                        <small>Already have an account? <a href="{% url 'transfers:login' %}" style="color: #6c757d;">Log in here</a>.</small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

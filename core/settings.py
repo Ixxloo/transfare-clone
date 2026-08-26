@@ -13,13 +13,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 from pathlib import Path
 import os, dj_database_url
 from dotenv import load_dotenv
-from pathlib import Path
-import os, dj_database_url
-from dotenv import load_dotenv
 
 load_dotenv()          # ← must run before anything reads env vars
-
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,7 +77,6 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {"default": dj_database_url.config(conn_max_age=600, ssl_require=not DEBUG)}
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/6.1/ref/settings/#auth-password-validators
 
@@ -107,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Amman'
 
 USE_I18N = True
 
@@ -131,4 +125,3 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
-
