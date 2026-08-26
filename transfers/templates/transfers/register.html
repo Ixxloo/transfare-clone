@@ -16,7 +16,21 @@
 
                     <form method="POST">
                         {% csrf_token %}
-                        
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {% for field, errors in form.errors.items %}
+                                {% for e in errors %}<div>{{ field }}: {{ e }}</div>{% endfor %}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                {% for field, errors in form.errors.items %}
+                                {% for e in errors %}<div>{{ field }}: {{ e }}</div>{% endfor %}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        {{ form.as_p }}
                         {{ form.as_p }}
                         
                         <div class="d-grid gap-2 mt-4">
