@@ -15,3 +15,30 @@
 
 .error   { color: #c0392b; }
 .success { color: #27ae60; }
+.messages {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.toast {
+  padding: .75rem 1.25rem;
+  border-radius: 6px;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  animation: slidein .25s ease;
+}
+
+.toast-success { background: #27ae60; }
+.toast-error   { background: #c0392b; }
+.toast-warning { background: #e67e22; }
+.toast-info    { background: #2980b9; }
+
+@keyframes slidein {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: none; }
+}
