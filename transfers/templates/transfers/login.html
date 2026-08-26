@@ -5,14 +5,14 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
-            <div class="card shadow-sm border-0" style="background-color: #ffffff; border-top: 5px solid #90EE90 !important;">
-                <div class="card-body p-4" style="background-color: #F8F9FA;">
+            <div class="card shadow-lg border-0" style="background-color: #ffffff; border-top: 5px solid #90EE90 !important; border-radius: 12px;">
+                <div class="card-body p-5" style="background-color: #F8F9FA; border-radius: 0 0 12px 12px;">
                     
-                    <h2 class="text-center mb-4" style="color: #4a4a4a; background-color: #E6E6FA; padding: 10px; border-radius: 5px;">
+                    <h2 class="text-center mb-2 fw-bold" style="color: #4a4a4a; background-color: #E6E6FA; padding: 12px; border-radius: 8px;">
                         Welcome Back
                     </h2>
                     
-                    <p class="text-center text-muted mb-4">Log in to manage your active transfer links.</p>
+                    <p class="text-center text-muted mb-4 small">Log in to manage your active transfer links.</p>
 
                     <form method="POST">
                         {% csrf_token %}
@@ -20,14 +20,14 @@
                         {{ form.as_p }}
                         
                         <div class="d-grid gap-2 mt-4">
-                            <button type="submit" class="btn fw-bold" style="background-color: #90EE90; color: #2c3e50;">
+                            <button type="submit" class="btn btn-theme py-2 fs-6">
                                 Log In
                             </button>
                         </div>
                     </form>
                     
-                    <div class="text-center mt-3">
-                        <small>Don't have an account? <a href="{% url 'transfers:register' %}" style="color: #6c757d;">Register here</a>.</small>
+                    <div class="text-center mt-4">
+                        <small class="text-muted">Don't have an account? <a href="{% url 'transfers:register' %}" class="fw-semibold text-decoration-none" style="color: #2c3e50;">Register here</a>.</small>
                     </div>
 
                 </div>
