@@ -1,1 +1,17 @@
 :root { --accent: #4361ee; }
+.dropzone {
+  border: 2px dashed #999;
+  border-radius: 8px;
+  padding: 3rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  background: #f7f7f7;
+}
+
+.dropzone.dragging {
+  border-color: #4361ee;
+  background: #eef1ff;
+}
+
+.error   { color: #c0392b; }
+.success { color: #27ae60; }
